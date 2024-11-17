@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		BFAAC70A2CE1428D0060D744 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BFAAC7092CE1428D0060D744 /* FirebaseAnalytics */; };
+		BFAAC70C2CE14C0B0060D744 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BFAAC70B2CE14C0B0060D744 /* FirebaseFirestore */; };
+		BFDCEDFA2CE252500099177C /* LinkKit in Frameworks */ = {isa = PBXBuildFile; productRef = BFDCEDF92CE252500099177C /* LinkKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		BFAAC6EA2CE138FA0060D744 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFDCEDFA2CE252500099177C /* LinkKit in Frameworks */,
+				BFAAC70A2CE1428D0060D744 /* FirebaseAnalytics in Frameworks */,
+				BFAAC70C2CE14C0B0060D744 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +121,9 @@
 			);
 			name = One;
 			packageProductDependencies = (
+				BFAAC7092CE1428D0060D744 /* FirebaseAnalytics */,
+				BFAAC70B2CE14C0B0060D744 /* FirebaseFirestore */,
+				BFDCEDF92CE252500099177C /* LinkKit */,
 			);
 			productName = One;
 			productReference = BFAAC6D92CE138F90060D744 /* One.app */;
@@ -195,6 +207,10 @@
 			);
 			mainGroup = BFAAC6D02CE138F90060D744;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				BFAAC7082CE1428D0060D744 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				BFDCEDF82CE252500099177C /* XCRemoteSwiftPackageReference "plaid-link-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BFAAC6DA2CE138F90060D744 /* Products */;
 			projectDirPath = "";
@@ -393,6 +409,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = One/One.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"One/Preview Content\"";
@@ -422,6 +439,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = One/One.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"One/Preview Content\"";
@@ -558,6 +576,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BFAAC7082CE1428D0060D744 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.4.0;
+			};
+		};
+		BFDCEDF82CE252500099177C /* XCRemoteSwiftPackageReference "plaid-link-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/plaid/plaid-link-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BFAAC7092CE1428D0060D744 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFAAC7082CE1428D0060D744 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		BFAAC70B2CE14C0B0060D744 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFAAC7082CE1428D0060D744 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		BFDCEDF92CE252500099177C /* LinkKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFDCEDF82CE252500099177C /* XCRemoteSwiftPackageReference "plaid-link-ios" */;
+			productName = LinkKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BFAAC6D12CE138F90060D744 /* Project object */;
 }
