@@ -17,7 +17,7 @@ struct One_uiApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()   // Your main view
+            PaymentView()   // Your main view
         }
     }
 }

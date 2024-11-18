@@ -6,6 +6,7 @@ import PassKit
 struct PaymentView: View {
     @State private var isProcessingPayment = false
     @State private var paymentSheet: PaymentSheet?
+    @State private var paymentSucceeded = false // State to track successful payment
     
     var body: some View {
         VStack {
@@ -17,6 +18,11 @@ struct PaymentView: View {
                     startApplePay()
                 }
                 .padding()
+            }
+            
+            // Show content view if payment succeeded
+            if paymentSucceeded {
+                ContentView() // The content view after successful payment
             }
         }
         .onAppear {
@@ -59,7 +65,8 @@ struct PaymentView: View {
                     switch paymentResult {
                     case .completed:
                         print("✅ Payment completed successfully!")
-                        // Optionally, you can send the amount or perform additional actions here
+                        // After successful payment, update the state to show content view
+                        self.paymentSucceeded = true
                     case .canceled:
                         print("🚫 Payment was canceled by the user.")
                     case .failed(let error):
@@ -72,7 +79,7 @@ struct PaymentView: View {
     }
     
     func fetchPaymentIntentFromBackend(completion: @escaping (String, Int) -> Void) {
-        guard let url = URL(string: "https://c9b5-173-94-62-99.ngrok-free.app/create-payment-intent") else {
+        guard let url = URL(string: "https://1631-2600-1700-25d8-4130-b501-290b-18f2-a877.ngrok-free.app/create-payment-intent") else {
             print("❌ Invalid URL for backend API.")
             return
         }
