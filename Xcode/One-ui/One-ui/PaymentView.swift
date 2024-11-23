@@ -7,7 +7,10 @@ struct PaymentView: View {
     @State private var isProcessingPayment = false
     @State private var paymentSheet: PaymentSheet?
     @State private var paymentSucceeded = false // State to track successful payment
-    
+    @State private var showErrorAlert = false // State to show error alert
+    @State private var errorMessage = "" // State to store error message
+    @State private var isPaymentInProgress = false // State to track payment in progress
+
     var body: some View {
         VStack {
             if isProcessingPayment {
@@ -15,9 +18,11 @@ struct PaymentView: View {
                     .progressViewStyle(CircularProgressViewStyle())
             } else {
                 Button("Pay with Apple Pay") {
-                    startApplePay()
+                    isPaymentInProgress = true
+                        startApplePay()
                 }
                 .padding()
+                .disabled(isPaymentInProgress)  // Disable button when payment is in progress
             }
             
             // Show content view if payment succeeded
@@ -28,6 +33,12 @@ struct PaymentView: View {
         .onAppear {
             // Initialize Stripe publishable key only when the view appears
             StripeAPI.defaultPublishableKey = "pk_test_51QLo6WBsR5frtF6syrD7xI8NcdzPmqSqLsoPQjQPrgFHIPN1jD2m5EyPwVYgVNvwRHka5i9HYXfeagUv3gIicxFV00WDdP65OQ"
+        }
+        // Show error alert if there's an error
+        .alert(isPresented: $showErrorAlert) {
+            Alert(title: Text("Payment Unavailable"),
+                  message: Text(errorMessage),
+                  dismissButton: .default(Text("OK")))
         }
     }
     
@@ -57,29 +68,37 @@ struct PaymentView: View {
             
             // Step 4: Present PaymentSheet
             DispatchQueue.main.async {
-                print("🔲 Presenting PaymentSheet...")
-                self.isProcessingPayment = true // Show loading indicator
-                paymentSheet.present(from: UIApplication.shared.windows.first!.rootViewController!) { paymentResult in
-                    self.isProcessingPayment = false // Hide loading indicator after payment result
-
-                    switch paymentResult {
-                    case .completed:
-                        print("✅ Payment completed successfully!")
-                        // After successful payment, update the state to show content view
-                        self.paymentSucceeded = true
-                    case .canceled:
-                        print("🚫 Payment was canceled by the user.")
-                    case .failed(let error):
-                        print("❌ Payment failed with error: \(error.localizedDescription)")
-                        logPaymentError(error)
+                // Check if the current root view controller is presenting another view controller
+                if let rootViewController = UIApplication.shared.windows.first?.rootViewController,
+                   rootViewController.presentedViewController == nil {
+                    print("🔲 Presenting PaymentSheet...")
+                    self.isPaymentInProgress = true // Disable the button and show loading indicator
+                    paymentSheet.present(from: rootViewController) { paymentResult in
+                        // Only set `isPaymentInProgress = false` after the completion handler
+                        self.isPaymentInProgress = false // Enable the button after payment result
+                        self.isProcessingPayment = false // Hide loading indicator
+                        
+                        switch paymentResult {
+                        case .completed:
+                            print("✅ Payment completed successfully!")
+                            // After successful payment, update the state to show content view
+                            self.paymentSucceeded = true
+                        case .canceled:
+                            print("🚫 Payment was canceled by the user.")
+                        case .failed(let error):
+                            print("❌ Payment failed with error: \(error.localizedDescription)")
+                            logPaymentError(error)
+                        }
                     }
+                } else {
+                    print("❌ PaymentSheet cannot be presented. Another view controller is already being presented.")
                 }
             }
         }
     }
     
     func fetchPaymentIntentFromBackend(completion: @escaping (String, Int) -> Void) {
-        guard let url = URL(string: "https://1631-2600-1700-25d8-4130-b501-290b-18f2-a877.ngrok-free.app/create-payment-intent") else {
+        guard let url = URL(string: "https://d19a-2600-1700-25d8-4130-b501-290b-18f2-a877.ngrok-free.app/create-payment-intent") else {
             print("❌ Invalid URL for backend API.")
             return
         }
@@ -90,7 +109,7 @@ struct PaymentView: View {
         
         // Define the amount in cents
         let amount = 1000 // Amount in cents
-        let body: [String: Any] = ["amount": amount, "currency": "usd"]
+        let body: [String: Any] = ["amount": amount, "currency": "usd","charity":"hardcore"]
         print("🔄 Sending request to backend with data: \(body)")
         
         request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
@@ -98,11 +117,19 @@ struct PaymentView: View {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print("❌ Error fetching payment intent: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.errorMessage = "Payment Unavailable. Please try again later."
+                    self.showErrorAlert = true // Show the error alert
+                }
                 return
             }
             
             guard let data = data else {
                 print("❌ No data received from backend.")
+                DispatchQueue.main.async {
+                    self.errorMessage = "Payment Unavailable. Please try again later."
+                    self.showErrorAlert = true // Show the error alert
+                }
                 return
             }
             
@@ -120,9 +147,17 @@ struct PaymentView: View {
                     completion(clientSecret, amount)
                 } else {
                     print("❌ Client secret not found in the response.")
+                    DispatchQueue.main.async {
+                        self.errorMessage = "Payment Unavailable. Please try again later."
+                        self.showErrorAlert = true // Show the error alert
+                    }
                 }
             } else {
                 print("❌ Error parsing backend response.")
+                DispatchQueue.main.async {
+                    self.errorMessage = "Payment Unavailable. Please try again later."
+                    self.showErrorAlert = true // Show the error alert
+                }
             }
         }
         
@@ -141,3 +176,4 @@ struct PaymentView: View {
         }
     }
 }
+

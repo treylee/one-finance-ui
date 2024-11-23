@@ -15,6 +15,13 @@
 		BFBC4E6A2CEA55EF00514B49 /* StripePaymentSheet in Frameworks */ = {isa = PBXBuildFile; productRef = BFBC4E692CEA55EF00514B49 /* StripePaymentSheet */; };
 		BFBC4E6C2CEA55EF00514B49 /* StripePayments in Frameworks */ = {isa = PBXBuildFile; productRef = BFBC4E6B2CEA55EF00514B49 /* StripePayments */; };
 		BFBC4E6E2CEA55EF00514B49 /* StripePaymentsUI in Frameworks */ = {isa = PBXBuildFile; productRef = BFBC4E6D2CEA55EF00514B49 /* StripePaymentsUI */; };
+		BFBC4E7E2CEAB11D00514B49 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BFBC4E7D2CEAB11D00514B49 /* FirebaseAnalytics */; };
+		BFBC4E802CEAB11D00514B49 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BFBC4E7F2CEAB11D00514B49 /* FirebaseAuth */; };
+		BFBC4E822CEAB11D00514B49 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = BFBC4E812CEAB11D00514B49 /* FirebaseAuthCombine-Community */; };
+		BFBC4E842CEAB11D00514B49 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = BFBC4E832CEAB11D00514B49 /* FirebaseCore */; };
+		BFBC4E862CEAB11D00514B49 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BFBC4E852CEAB11D00514B49 /* FirebaseDatabase */; };
+		BFBC4E882CEAB11D00514B49 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BFBC4E872CEAB11D00514B49 /* FirebaseFirestore */; };
+		BFBC4E8A2CEAB11D00514B49 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = BFBC4E892CEAB11D00514B49 /* FirebaseStorage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,14 +70,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFBC4E862CEAB11D00514B49 /* FirebaseDatabase in Frameworks */,
 				BFBC4E642CEA55EF00514B49 /* StripeCardScan in Frameworks */,
+				BFBC4E802CEAB11D00514B49 /* FirebaseAuth in Frameworks */,
 				BFBC4E662CEA55EF00514B49 /* StripeFinancialConnections in Frameworks */,
 				BFBC4E682CEA55EF00514B49 /* StripeIdentity in Frameworks */,
 				BFBC4E602CEA55EF00514B49 /* Stripe in Frameworks */,
 				BFBC4E6A2CEA55EF00514B49 /* StripePaymentSheet in Frameworks */,
+				BFBC4E822CEAB11D00514B49 /* FirebaseAuthCombine-Community in Frameworks */,
+				BFBC4E8A2CEAB11D00514B49 /* FirebaseStorage in Frameworks */,
 				BFBC4E6C2CEA55EF00514B49 /* StripePayments in Frameworks */,
 				BFBC4E6E2CEA55EF00514B49 /* StripePaymentsUI in Frameworks */,
 				BFBC4E622CEA55EF00514B49 /* StripeApplePay in Frameworks */,
+				BFBC4E842CEAB11D00514B49 /* FirebaseCore in Frameworks */,
+				BFBC4E7E2CEAB11D00514B49 /* FirebaseAnalytics in Frameworks */,
+				BFBC4E882CEAB11D00514B49 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +153,13 @@
 				BFBC4E692CEA55EF00514B49 /* StripePaymentSheet */,
 				BFBC4E6B2CEA55EF00514B49 /* StripePayments */,
 				BFBC4E6D2CEA55EF00514B49 /* StripePaymentsUI */,
+				BFBC4E7D2CEAB11D00514B49 /* FirebaseAnalytics */,
+				BFBC4E7F2CEAB11D00514B49 /* FirebaseAuth */,
+				BFBC4E812CEAB11D00514B49 /* FirebaseAuthCombine-Community */,
+				BFBC4E832CEAB11D00514B49 /* FirebaseCore */,
+				BFBC4E852CEAB11D00514B49 /* FirebaseDatabase */,
+				BFBC4E872CEAB11D00514B49 /* FirebaseFirestore */,
+				BFBC4E892CEAB11D00514B49 /* FirebaseStorage */,
 			);
 			productName = "One-ui";
 			productReference = BFBC4E312CEA55CE00514B49 /* One-ui.app */;
@@ -224,6 +245,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				BFBC4E5E2CEA55EF00514B49 /* XCRemoteSwiftPackageReference "stripe-ios" */,
+				BFBC4E7C2CEAB11D00514B49 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BFBC4E322CEA55CE00514B49 /* Products */;
@@ -600,6 +622,14 @@
 				minimumVersion = 24.0.0;
 			};
 		};
+		BFBC4E7C2CEAB11D00514B49 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -642,6 +672,41 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BFBC4E5E2CEA55EF00514B49 /* XCRemoteSwiftPackageReference "stripe-ios" */;
 			productName = StripePaymentsUI;
+		};
+		BFBC4E7D2CEAB11D00514B49 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFBC4E7C2CEAB11D00514B49 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		BFBC4E7F2CEAB11D00514B49 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFBC4E7C2CEAB11D00514B49 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		BFBC4E812CEAB11D00514B49 /* FirebaseAuthCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFBC4E7C2CEAB11D00514B49 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAuthCombine-Community";
+		};
+		BFBC4E832CEAB11D00514B49 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFBC4E7C2CEAB11D00514B49 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		BFBC4E852CEAB11D00514B49 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFBC4E7C2CEAB11D00514B49 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		BFBC4E872CEAB11D00514B49 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFBC4E7C2CEAB11D00514B49 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		BFBC4E892CEAB11D00514B49 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFBC4E7C2CEAB11D00514B49 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
